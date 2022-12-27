@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>bionumpy.io.file_buffers &mdash; bionumpy  documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/design-tabs.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../menu.html" class="icon icon-home"> bionumpy
+          </a>
+              <div class="version">
+                0.2.11
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Home</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">Geting started with BioNumPy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../introduction.html">A 10-minute introduction to BioNumPy</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorials/fastq_filtering.html">Filtering FASTQ reads</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorials/bam_handling.html">Working with BAM-files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorials/subsetting_bed.html">Getting read pileup for multiple regions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorials/fastqc.html">FastQC-like quality-checking of FASTQ files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorials/gc_content.html">Computing GC content inside genes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorials/numpy_operations.html">Using NumPy functionality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorials/position_weight_matrix.html">Position Weight Matrix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorials/set_of_sequences.html">Simulating sequence datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorials/similarity_measures.html">Computing the similarity between two BED-files</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">BioNumPy Concepts</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/reading_files.html">Reading files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/working_with_big_data.html">Working with big data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/encoding.html">Encodings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/supported_file_formats.html">Supported file formats</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/supported_file_formats.html#implementing-a-new-file-format">Implementing a new file format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/sequences.html">Sequences</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/intervals.html">Intervals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/multiple_data_sources.html">Working with Multiple Files/Data Sources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/broadcastable_functions.html">Broadcastable Functions</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules/bnpdataclass.html">BnpDataclass</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules/genome_arithmetics.html">Genome arithmetics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules/io.html">IO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules/sequences.html">Sequences</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules/streams.html">Streams</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Other</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../developer_guide.html">Developer guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../manuscript/index.html">BioNumPy manuscript</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../menu.html">bionumpy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../menu.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">bionumpy.io.file_buffers</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for bionumpy.io.file_buffers</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">FileIO</span>
+<span class="kn">from</span> <span class="nn">npstructures</span> <span class="kn">import</span> <span class="n">RaggedArray</span><span class="p">,</span> <span class="n">RaggedView</span><span class="p">,</span> <span class="n">RaggedShape</span>
+<span class="kn">from</span> <span class="nn">.exceptions</span> <span class="kn">import</span> <span class="n">FormatException</span>
+<span class="kn">from</span> <span class="nn">..bnpdataclass</span> <span class="kn">import</span> <span class="n">bnpdataclass</span>
+<span class="kn">from</span> <span class="nn">..datatypes</span> <span class="kn">import</span> <span class="n">SequenceEntry</span><span class="p">,</span> <span class="n">SequenceEntryWithQuality</span>
+<span class="kn">from</span> <span class="nn">..encoded_array</span> <span class="kn">import</span> <span class="n">EncodedArray</span><span class="p">,</span> <span class="n">EncodedRaggedArray</span>
+<span class="kn">from</span> <span class="nn">..encodings</span> <span class="kn">import</span> <span class="n">QualityEncoding</span><span class="p">,</span> <span class="n">BaseEncoding</span>
+
+<span class="n">NEWLINE</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+
+
+<span class="k">class</span> <span class="nc">FileBuffer</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot; Base class for file buffer classes. Different FileBuffer classes</span>
+<span class="sd">    should correspond to different file formats.</span>
+
+<span class="sd">    A FileBuffer class can extract the text/bytes corresponding to complete</span>
+<span class="sd">    entries from a raw buffer (`from_raw_buffer`) and convert the bytes/text from</span>
+<span class="sd">    those entries into data in `@npdataclass` objects.</span>
+
+<span class="sd">    The `from_data` method should convert `@npdataclass` objects into text/bytes</span>
+<span class="sd">    that can be written to file.</span>
+
+<span class="sd">    This base class provides some convenience methods to extract text form parts of</span>
+<span class="sd">    a buffer into meaningful data</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_buffer_divisor</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">COMMENT</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">EncodedArray</span><span class="p">,</span> <span class="n">new_lines</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_data</span> <span class="o">=</span> <span class="n">data</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_new_lines</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asanyarray</span><span class="p">(</span><span class="n">new_lines</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_is_validated</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="o">.</span><span class="n">size</span>
+
+    <span class="k">def</span> <span class="nf">raise_if</span><span class="p">(</span><span class="n">condition</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">condition</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">FormatException</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">n_lines</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_new_lines</span><span class="p">)</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">read_header</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">file_object</span><span class="p">:</span> <span class="n">FileIO</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Read the header data from the file</span>
+
+<span class="sd">        The data returned here is passed to each buffer through the</span>
+<span class="sd">        `from_raw_buffer` method when reading a file, and can so influence</span>
+<span class="sd">        how the data in the file is parsed.</span>
+
+<span class="sd">        This function should leave the file pointer pointing to the beginning</span>
+<span class="sd">        of the data to be read.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        file_object : file</span>
+<span class="sd">            The file object to read the file from</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        6</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">cls</span><span class="o">.</span><span class="n">COMMENT</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span>
+        <span class="n">comment</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">COMMENT</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">comment</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">comment</span> <span class="o">=</span> <span class="nb">ord</span><span class="p">(</span><span class="n">comment</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">file_object</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">line</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="n">comment</span><span class="p">:</span>
+                <span class="n">file_object</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="o">-</span><span class="nb">len</span><span class="p">(</span><span class="n">line</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
+                <span class="k">break</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_raw_buffer</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">raw_buffer</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">header_data</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;FileBuffer&quot;</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Create a buffer with full entries</span>
+
+<span class="sd">        A raw buffer can end with data that does not represent full entries.</span>
+<span class="sd">        This method extracts all the full entries, so that the next buffer can</span>
+<span class="sd">        start from the last incomplete entry.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        chunk : np.ndarray</span>
+<span class="sd">            Raw buffer with data that might end with incomplete entry</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        &#39;FileBuffer&#39;</span>
+<span class="sd">            Buffer with complete entries</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="bp">NotImplemented</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_data</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">bnpdataclass</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;FileBuffer&quot;</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Create FileBuffer from a dataset</span>
+
+<span class="sd">        Create a FileBuffer that can be written to file</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        data : npdataclass</span>
+<span class="sd">            dataset containing the data to be written</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        &#39;FileBuffer&#39;</span>
+<span class="sd">            FileBuffer containing the data</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">NotImplemented</span>
+
+    <span class="k">def</span> <span class="nf">validate_if_not</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_validated</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_validate</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_is_validated</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="k">def</span> <span class="nf">get_data</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">bnpdataclass</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Extract the data from the buffer</span>
+
+<span class="sd">        The default way to extract data from the the buffer</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        npdataclass</span>
+<span class="sd">            dataset containing the data from the buffer</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">NotImplemented</span>
+
+    <span class="k">def</span> <span class="nf">_move_intervals_to_2d_array</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">starts</span><span class="p">,</span> <span class="n">ends</span><span class="p">,</span> <span class="n">fill_value</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="n">max_chars</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">ends</span><span class="o">-</span><span class="n">starts</span><span class="p">)</span>
+        <span class="n">view_starts</span> <span class="o">=</span> <span class="p">(</span><span class="n">ends</span><span class="o">-</span><span class="n">max_chars</span><span class="p">)</span>
+        <span class="n">indices</span> <span class="o">=</span> <span class="n">view_starts</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]</span><span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">max_chars</span><span class="p">)</span>
+        <span class="n">array</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="n">indices</span><span class="o">.</span><span class="n">ravel</span><span class="p">()]</span>
+        <span class="n">zeroed</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">RaggedView</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">starts</span><span class="o">.</span><span class="n">size</span><span class="p">)</span><span class="o">*</span><span class="n">max_chars</span><span class="p">,</span> <span class="n">max_chars</span><span class="o">-</span><span class="p">(</span><span class="n">ends</span><span class="o">-</span><span class="n">starts</span><span class="p">))</span><span class="o">.</span><span class="n">get_flat_indices</span><span class="p">()</span>
+        <span class="n">array</span><span class="p">[</span><span class="n">zeroed</span><span class="p">]</span> <span class="o">=</span> <span class="n">fill_value</span>
+        <span class="k">return</span> <span class="n">array</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">max_chars</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">_move_intervals_to_ragged_array</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">starts</span><span class="p">,</span> <span class="n">ends</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">lens</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">as_sequence</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">lens</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">lens</span> <span class="o">=</span> <span class="n">ends</span> <span class="o">-</span> <span class="n">starts</span>
+            <span class="c1"># indices, shape = RaggedView(starts, lens).get_flat_indices()</span>
+        <span class="n">e</span> <span class="o">=</span> <span class="n">EncodedRaggedArray</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">,</span> <span class="n">RaggedView</span><span class="p">(</span><span class="n">starts</span><span class="p">,</span> <span class="n">lens</span><span class="p">))</span>
+        <span class="n">e</span><span class="o">.</span><span class="n">is_contigous</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">return</span> <span class="n">e</span>
+        <span class="c1"># return EncodedRaggedArray(self._data[indices], shape)</span>
+
+    <span class="k">def</span> <span class="nf">_move_2d_array_to_intervals</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">array</span><span class="p">,</span> <span class="n">starts</span><span class="p">,</span> <span class="n">ends</span><span class="p">):</span>
+        <span class="n">max_chars</span> <span class="o">=</span> <span class="n">array</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">to_indices</span> <span class="o">=</span> <span class="n">ends</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span><span class="o">-</span><span class="n">max_chars</span><span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">max_chars</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="n">to_indices</span><span class="p">]</span> <span class="o">=</span> <span class="n">array</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">contains_complete_entry</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">chunks</span><span class="p">):</span>
+        <span class="n">n_new_lines</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">EncodedArray</span><span class="p">(</span><span class="n">chunk</span><span class="p">,</span> <span class="n">BaseEncoding</span><span class="p">)</span> <span class="o">==</span> <span class="n">NEWLINE</span><span class="p">)</span> <span class="k">for</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="n">chunks</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">n_new_lines</span> <span class="o">&gt;=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">n_lines_per_entry</span>
+
+
+<span class="k">class</span> <span class="nc">OneLineBuffer</span><span class="p">(</span><span class="n">FileBuffer</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Base class for file formats where data fields are contained in lines.&quot;&quot;&quot;</span>
+
+    <span class="n">n_lines_per_entry</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="n">_buffer_divisor</span> <span class="o">=</span> <span class="mi">32</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_raw_buffer</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">chunk</span><span class="p">,</span> <span class="n">header_data</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;OneLineBuffer&quot;</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Create a buffer with full entries</span>
+
+<span class="sd">        Extract complete entries, i. e. a number of lines that is divisible by lines per entry</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        chunk : np.ndarray</span>
+<span class="sd">            Raw buffer with data that might end with incomplete entry</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        &#39;OneLineBuffer&#39;</span>
+<span class="sd">            Buffer with complete entries</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        8</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">assert</span> <span class="n">header_data</span> <span class="ow">is</span> <span class="kc">None</span>
+        <span class="n">chunk</span> <span class="o">=</span> <span class="n">EncodedArray</span><span class="p">(</span><span class="n">chunk</span><span class="p">,</span> <span class="n">BaseEncoding</span><span class="p">)</span>
+        <span class="n">new_lines</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">flatnonzero</span><span class="p">(</span><span class="n">chunk</span> <span class="o">==</span> <span class="n">NEWLINE</span><span class="p">)</span>
+        <span class="n">n_lines</span> <span class="o">=</span> <span class="n">new_lines</span><span class="o">.</span><span class="n">size</span>
+        <span class="k">assert</span> <span class="n">n_lines</span> <span class="o">&gt;=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">n_lines_per_entry</span><span class="p">,</span> <span class="s2">&quot;No complete entry in buffer. Try increasing chunk_size.&quot;</span>
+        <span class="n">new_lines</span> <span class="o">=</span> <span class="n">new_lines</span><span class="p">[:</span> <span class="n">n_lines</span> <span class="o">-</span> <span class="p">(</span><span class="n">n_lines</span> <span class="o">%</span> <span class="bp">cls</span><span class="o">.</span><span class="n">n_lines_per_entry</span><span class="p">)]</span>
+        <span class="n">chunk</span> <span class="o">=</span> <span class="n">chunk</span><span class="p">[:</span> <span class="n">new_lines</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">chunk</span><span class="p">[:</span> <span class="n">new_lines</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">],</span> <span class="n">new_lines</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">get_data</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">bnpdataclass</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Get and parse fields from each line&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">validate_if_not</span><span class="p">()</span>
+        <span class="n">starts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_new_lines</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">lengths</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">starts</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lines</span> <span class="o">=</span> <span class="n">EncodedRaggedArray</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">,</span> <span class="n">RaggedShape</span><span class="p">(</span><span class="n">lengths</span><span class="p">))</span>
+        <span class="n">sequences</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lines</span><span class="p">[</span><span class="mi">1</span><span class="p">::</span><span class="bp">self</span><span class="o">.</span><span class="n">n_lines_per_entry</span><span class="p">,</span> <span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">headers</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lines</span><span class="p">[::</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_lines_per_entry</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">SequenceEntry</span><span class="p">(</span><span class="n">headers</span><span class="p">,</span> <span class="n">sequences</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">count_entries</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Count number of entries in file&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_new_lines</span><span class="p">)</span><span class="o">//</span><span class="bp">self</span><span class="o">.</span><span class="n">n_lines_per_entry</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_data</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">entries</span><span class="p">:</span> <span class="n">bnpdataclass</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;OneLineBuffer&quot;</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Convert the data from the entries into a buffer that can be written to file</span>
+<span class="sd">        </span>
+<span class="sd">        Extract the name and the sequence and make a buffer with alternating lines</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        entries : bnpdataclass</span>
+<span class="sd">            The entries to be written to the buffer</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        &quot;OneLineBuffer&quot;</span>
+<span class="sd">            A ASCII encoded buffer</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">name_lengths</span> <span class="o">=</span> <span class="n">entries</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">lengths</span>
+        <span class="n">sequence_lengths</span> <span class="o">=</span> <span class="n">entries</span><span class="o">.</span><span class="n">sequence</span><span class="o">.</span><span class="n">lengths</span>
+        <span class="n">line_lengths</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">(</span>
+            <span class="p">(</span><span class="n">name_lengths</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">+</span> <span class="mi">2</span><span class="p">,</span> <span class="n">sequence_lengths</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="p">)</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
+        <span class="n">buf</span> <span class="o">=</span> <span class="n">EncodedArray</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">line_lengths</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">),</span> <span class="n">BaseEncoding</span><span class="p">)</span>
+        <span class="n">lines</span> <span class="o">=</span> <span class="n">EncodedRaggedArray</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span> <span class="n">line_lengths</span><span class="p">)</span>
+        <span class="n">step</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">n_lines_per_entry</span>
+        <span class="n">lines</span><span class="p">[</span><span class="mi">0</span><span class="p">::</span><span class="n">step</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">entries</span><span class="o">.</span><span class="n">name</span>
+        <span class="n">lines</span><span class="p">[</span><span class="mi">1</span><span class="p">::</span><span class="n">step</span><span class="p">,</span> <span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">EncodedRaggedArray</span><span class="p">(</span>
+            <span class="n">EncodedArray</span><span class="p">(</span><span class="n">entries</span><span class="o">.</span><span class="n">sequence</span><span class="o">.</span><span class="n">encoding</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">entries</span><span class="o">.</span><span class="n">sequence</span><span class="o">.</span><span class="n">ravel</span><span class="p">()),</span>  <span class="n">entries</span><span class="o">.</span><span class="n">sequence</span><span class="o">.</span><span class="n">encoding</span><span class="p">),</span><span class="n">entries</span><span class="o">.</span><span class="n">sequence</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+        <span class="n">lines</span><span class="p">[</span><span class="mi">0</span><span class="p">::</span><span class="n">step</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;&gt;&quot;</span>
+
+        <span class="n">lines</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="k">return</span> <span class="n">buf</span>
+
+    <span class="k">def</span> <span class="nf">_validate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">n_lines</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_new_lines</span><span class="o">.</span><span class="n">size</span>
+        <span class="k">assert</span> <span class="n">n_lines</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_lines_per_entry</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;Wrong number of lines in buffer&quot;</span>
+        <span class="n">header_idxs</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_new_lines</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">n_lines_per_entry</span> <span class="o">-</span> <span class="mi">1</span> <span class="p">:</span> <span class="o">-</span><span class="mi">1</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_lines_per_entry</span><span class="p">]</span>
+            <span class="o">+</span> <span class="mi">1</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="n">header_idxs</span><span class="p">]</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">HEADER</span><span class="p">)</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">HEADER</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">HEADER</span><span class="p">:</span>
+                <span class="n">line_number</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">line_number</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">flatnonzero</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="n">header_idxs</span><span class="p">]</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">HEADER</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">n_lines_per_entry</span>
+            <span class="k">raise</span> <span class="n">FormatException</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Expected header line to start with </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">HEADER</span><span class="si">}</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">,</span> <span class="n">line_number</span><span class="o">=</span><span class="n">line_number</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_is_validated</span> <span class="o">=</span> <span class="kc">True</span>
+
+
+<div class="viewcode-block" id="TwoLineFastaBuffer"><a class="viewcode-back" href="../../../modules/io.html#bionumpy.io.TwoLineFastaBuffer">[docs]</a><span class="k">class</span> <span class="nc">TwoLineFastaBuffer</span><span class="p">(</span><span class="n">OneLineBuffer</span><span class="p">):</span>
+    <span class="n">HEADER</span> <span class="o">=</span> <span class="s2">&quot;&gt;&quot;</span><span class="c1"># 62</span>
+    <span class="n">n_lines_per_entry</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="n">dataclass</span> <span class="o">=</span> <span class="n">SequenceEntry</span></div>
+
+
+<div class="viewcode-block" id="FastQBuffer"><a class="viewcode-back" href="../../../modules/io.html#bionumpy.io.FastQBuffer">[docs]</a><span class="k">class</span> <span class="nc">FastQBuffer</span><span class="p">(</span><span class="n">OneLineBuffer</span><span class="p">):</span>
+    <span class="n">HEADER</span> <span class="o">=</span> <span class="s2">&quot;@&quot;</span>
+    <span class="n">n_lines_per_entry</span> <span class="o">=</span> <span class="mi">4</span>
+    <span class="n">dataclass</span> <span class="o">=</span> <span class="n">SequenceEntryWithQuality</span>
+
+    <span class="k">def</span> <span class="nf">get_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">seq_entry</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">get_data</span><span class="p">()</span>
+        <span class="n">quality</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lines</span><span class="p">[</span><span class="mi">3</span> <span class="p">::</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_lines_per_entry</span><span class="p">,</span> <span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">SequenceEntryWithQuality</span><span class="p">(</span>
+            <span class="n">seq_entry</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">seq_entry</span><span class="o">.</span><span class="n">sequence</span><span class="p">,</span>
+            <span class="c1">#quality)</span>
+            <span class="n">QualityEncoding</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">quality</span><span class="p">))</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">_get_line_lens</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">entries</span><span class="p">):</span>
+        <span class="n">name_lengths</span> <span class="o">=</span> <span class="n">entries</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">lengths</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]</span>
+        <span class="n">sequence_lengths</span> <span class="o">=</span> <span class="n">entries</span><span class="o">.</span><span class="n">sequence</span><span class="o">.</span><span class="n">lengths</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]</span>
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">(</span>
+                <span class="p">(</span>
+                    <span class="n">name_lengths</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
+                    <span class="n">sequence_lengths</span><span class="p">,</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">sequence_lengths</span><span class="p">),</span>
+                    <span class="n">sequence_lengths</span><span class="p">,</span>
+                <span class="p">)</span>
+            <span class="p">)</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
+            <span class="o">+</span> <span class="mi">1</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_validate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">_validate</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_new_lines</span><span class="p">[</span><span class="mi">1</span><span class="p">::</span><span class="bp">self</span><span class="o">.</span><span class="n">n_lines_per_entry</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&quot;+&quot;</span><span class="p">):</span>
+            <span class="n">entry_number</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">flatnonzero</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_new_lines</span><span class="p">[</span><span class="mi">1</span><span class="p">::</span><span class="bp">self</span><span class="o">.</span><span class="n">n_lines_per_entry</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&quot;+&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">line_number</span> <span class="o">=</span> <span class="mi">2</span><span class="o">+</span><span class="n">entry_number</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">n_lines_per_entry</span>
+            <span class="k">raise</span> <span class="n">FormatException</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Expected &#39;+&#39; at third line of entry in </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">line_number</span><span class="o">=</span><span class="n">line_number</span><span class="p">)</span>
+        
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_data</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">entries</span><span class="p">):</span>
+        <span class="n">line_lengths</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_get_line_lens</span><span class="p">(</span><span class="n">entries</span><span class="p">)</span>
+        <span class="n">buf</span> <span class="o">=</span> <span class="n">EncodedArray</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">line_lengths</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">),</span> <span class="n">BaseEncoding</span><span class="p">)</span>
+        <span class="n">lines</span> <span class="o">=</span> <span class="n">EncodedRaggedArray</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span> <span class="n">line_lengths</span><span class="p">)</span>
+        <span class="n">step</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">n_lines_per_entry</span>
+        <span class="n">lines</span><span class="p">[</span><span class="mi">0</span><span class="p">::</span><span class="n">step</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">entries</span><span class="o">.</span><span class="n">name</span>
+        <span class="n">lines</span><span class="p">[</span><span class="mi">1</span><span class="p">::</span><span class="n">step</span><span class="p">,</span> <span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">EncodedRaggedArray</span><span class="p">(</span><span class="n">EncodedArray</span><span class="p">(</span><span class="n">entries</span><span class="o">.</span><span class="n">sequence</span><span class="o">.</span><span class="n">encoding</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">entries</span><span class="o">.</span><span class="n">sequence</span><span class="o">.</span><span class="n">ravel</span><span class="p">()),</span> <span class="n">BaseEncoding</span><span class="p">),</span> <span class="n">entries</span><span class="o">.</span><span class="n">sequence</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+        <span class="n">lines</span><span class="p">[</span><span class="mi">2</span><span class="p">::</span><span class="n">step</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;+&quot;</span>
+        <span class="n">lines</span><span class="p">[</span><span class="mi">3</span><span class="p">::</span><span class="n">step</span><span class="p">,</span> <span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">EncodedArray</span><span class="p">(</span><span class="n">QualityEncoding</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">entries</span><span class="o">.</span><span class="n">quality</span><span class="o">.</span><span class="n">ravel</span><span class="p">()),</span> <span class="n">BaseEncoding</span><span class="p">)</span>
+        <span class="n">lines</span><span class="p">[</span><span class="mi">0</span><span class="p">::</span><span class="n">step</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">HEADER</span>
+        <span class="n">lines</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+
+        <span class="k">return</span> <span class="n">buf</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Knut Rand.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
